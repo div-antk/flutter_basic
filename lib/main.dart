@@ -47,18 +47,14 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: [
-            Image.network(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'
+            Container(
+              width: double.infinity,
+              child: const Text(
+                'あたま',
+                textAlign: TextAlign.center,
+              ),
             ),
-            ElevatedButton(
-              child: const Text('次へ'),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NextPage('watasu')),
-                );
-              },
-            ),
+            const Text('からだ'),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
