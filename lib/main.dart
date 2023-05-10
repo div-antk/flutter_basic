@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/next_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,13 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('タイトル'),
+        title: const Text('タイトル'),
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text('次へ'),
+          child: const Text('次へ'),
           onPressed: () {
-            
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NextPage()),
+            );
           },
         ),
       ),
