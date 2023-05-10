@@ -38,26 +38,37 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final myController = TextEditingController();
+  late String name;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('タイトル'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              child: const Text(
-                'あたま',
-                textAlign: TextAlign.center,
+      body: Container(
+          width: double.infinity,
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(hintText: 'なまえ'),
+                onChanged: (text) {
+                  name = text;
+                },
               ),
-            ),
-            const Text('からだ'),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+              TextField(
+                controller: myController,
+                decoration: InputDecoration(hintText: 'シュミ'),
+              ),
+              ElevatedButton(
+                child: Text('新規登録'),
+                onPressed: () {
+                  final hobbyText = myController.text;
+                },
+              ),
+            ],
+          )),
     );
   }
 }
