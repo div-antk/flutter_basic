@@ -38,8 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final myController = TextEditingController();
-  late String name;
+  final items = List<String>.generate(10000, (i) => "Item $i");
 
   @override
   Widget build(BuildContext context) {
@@ -48,27 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('タイトル'),
       ),
       body: Container(
-          width: double.infinity,
-          child: Column(
-            children: [
-              TextField(
-                decoration: InputDecoration(hintText: 'なまえ'),
-                onChanged: (text) {
-                  name = text;
-                },
-              ),
-              TextField(
-                controller: myController,
-                decoration: InputDecoration(hintText: 'シュミ'),
-              ),
-              ElevatedButton(
-                child: Text('新規登録'),
-                onPressed: () {
-                  final hobbyText = myController.text;
-                },
-              ),
-            ],
-          )),
+        width: double.infinity,
+        child: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text('${items[index]}'),
+            );
+          },
+        ),
+      ),
     );
   }
 }
