@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
 
   final String title;
 
@@ -35,44 +33,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text('タイトル'),
-        actions: [
-          Icon(Icons.add),
-          Icon(Icons.share),
-        ],
       ),
       body: Center(
-        child: Container(
-          color: Colors.yellow,
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  '上段になっている',
-                ),
-                Text(
-                  '中段になっている',
-                ),
-                Text(
-                  '下段になっているっっっっっっｋ',
-                ),
-              ],
-            ),
-          ),
+        child: ElevatedButton(
+          child: Text('次へ'),
+          onPressed: () {
+            
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
