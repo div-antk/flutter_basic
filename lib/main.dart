@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MyTodoApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -50,33 +50,27 @@ class _MyWidgetState extends State<MyWidget> {
   }
 }
 
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key, required this.title});
+class MyTodoApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Todo App',
+      theme: ThemeData(
+        // テーマカラー
+        primarySwatch: Colors.blue,
+      ),
+      home: TodoListPage(),
+    );
+  }
+}
 
-//   final String title;
-
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('タイトル'),
-//       ),
-//       body: Container(
-//         width: double.infinity,
-//         child: ListView.builder(
-//           itemCount: items.length,
-//           itemBuilder: (context, index) {
-//             return ListTile(
-//               title: Text('${items[index]}'),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
+class TodoListPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('リスト一覧画面'),
+      ),
+    );
+  }
+}
