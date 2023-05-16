@@ -72,7 +72,7 @@ class TodoListPage extends StatelessWidget {
         title: Text('リスト一覧'),
       ),
       body: ListView(
-        children: <Widget> [
+        children: <Widget>[
           Card(
             child: ListTile(
               title: Text('1'),
@@ -128,9 +128,7 @@ class TodoAddPage extends StatelessWidget {
               width: double.infinity,
               // リスト追加ボタン
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: () {},
                 child: Text('リスト追加', style: TextStyle(color: Colors.white)),
               ),
@@ -145,6 +143,47 @@ class TodoAddPage extends StatelessWidget {
                 child: Text('キャンセル'),
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TodoAddPageState extends State<TodoAddPage> {
+  
+  // 入力されたテキストをデータをして持つ
+  String _text = '';
+
+  // データを元に表示するWidget
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('リスト追加'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(64),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // 入力されたテキストを表示
+            Text(_text, style: TextStyle(color: Colors.blue)),
+            const SizedBox(height: 8),
+            TextField(
+              // 入力されたテキストの値を受け取る
+              onChanged: (String value) {
+                // データが変更されたことを知らせる（画面を更新する）
+                setState(() {
+                  // データを変更
+                  _text = value;
+                });
+              },
+            ),
+            const SizedBox(height: 8),
+            Container( /* 保留 */),
+            const SizedBox(height: 8),
+            Container( /* 保留 */),
           ],
         ),
       ),
