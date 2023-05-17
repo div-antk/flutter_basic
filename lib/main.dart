@@ -73,10 +73,26 @@ class TodoListPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget> [
-          Text('1'),
-          Text('2'),
-          Text('3'),
-          Text('4'),
+          Card(
+            child: ListTile(
+              title: Text('1'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('2'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('3'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('3'),
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
