@@ -110,44 +110,9 @@ class TodoListPage extends StatelessWidget {
 }
 
 // リスト追加画面用
-class TodoAddPage extends StatelessWidget {
+class TodoAddPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('リスト追加'),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(64),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(),
-            const SizedBox(height: 8),
-            Container(
-              width: double.infinity,
-              // リスト追加ボタン
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                onPressed: () {},
-                child: Text('リスト追加', style: TextStyle(color: Colors.white)),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Container(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('キャンセル'),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  _TodoAddPageState createState() => _TodoAddPageState();
 }
 
 class _TodoAddPageState extends State<TodoAddPage> {
@@ -163,7 +128,7 @@ class _TodoAddPageState extends State<TodoAddPage> {
         title: Text('リスト追加'),
       ),
       body: Container(
-        padding: EdgeInsets.all(64),
+        padding: const EdgeInsets.all(64),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -181,7 +146,16 @@ class _TodoAddPageState extends State<TodoAddPage> {
               },
             ),
             const SizedBox(height: 8),
-            Container( /* 保留 */),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  // popの引数から前の画面にデータを渡す
+                  Navigator.of(context).pop(_text);
+                },
+              child: Text('リスト追加', style: TextStyle(color: Colors.white)),
+              ),
+            ),
             const SizedBox(height: 8),
             Container( /* 保留 */),
           ],
