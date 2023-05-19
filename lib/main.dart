@@ -96,12 +96,16 @@ class TodoListPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
+        onPressed: () async {
+          final newListText = await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
+              // 遷移先の画面としてリスト追加画面を指定
               return TodoAddPage();
             }),
           );
+          if (newListText != null) {
+            // キャンセルした場合は newListTextが null になる
+          }
         },
         child: Icon(Icons.add),
       ),
