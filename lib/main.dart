@@ -161,7 +161,16 @@ class _TodoAddPageState extends State<TodoAddPage> {
               ),
             ),
             const SizedBox(height: 8),
-            Container( /* 保留 */),
+            Container(
+              width: double.infinity,
+              // キャンセルボタン
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(_text);
+                },
+              child: Text('キャンセル'),
+              ),
+            ),
           ],
         ),
       ),
