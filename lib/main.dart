@@ -64,36 +64,31 @@ class MyTodoApp extends StatelessWidget {
   }
 }
 
-class TodoListPage extends StatelessWidget {
+class TodoListPage extends StatefulWidget {
+  @override
+  _TodoListPageState createState() => _TodoListPageState();
+}
+
+class _TodoListPageState extends State<TodoListPage> {
+    // Todoリストのデータ
+  List<String> todoList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('リスト一覧'),
       ),
-      body: ListView(
-        children: <Widget>[
-          Card(
+      // データを元にリストを作成
+      body: ListView.builder(
+        itemCount: todoList.length,
+        itemBuilder: (context, index) {
+          return Card(
             child: ListTile(
-              title: Text('1'),
+              title: Text(todoList[index]),
             ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('2'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('3'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('3'),
-            ),
-          ),
-        ],
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -105,6 +100,9 @@ class TodoListPage extends StatelessWidget {
           );
           if (newListText != null) {
             // キャンセルした場合は newListTextが null になる
+            setState(() {
+              todoList.add(newListText);
+            });
           }
         },
         child: Icon(Icons.add),
