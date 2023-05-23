@@ -1,4 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+Future<void> main() async {
+  // Firebase初期化
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 void main() => runApp(MyTodoApp());
 
@@ -10,14 +17,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: Center(
-          child: MyWidget(),
-        ),
-      ),
+      home: MyAuthPage(),
     );
   }
 }
+
+class MyAuthPage extends StatefulWidget {
+  @override
+  _MyAuthPageState createState() => _MyAuthPageState();
+}
+
+class _MyAuthPageState extends State<MyAuthPage> {
+  //
+}
+
+
 
 // StatefulWidgetを継承するとStateを扱うことができる
 // このWidgetを表示すると、Stateを元にUIが作成される
