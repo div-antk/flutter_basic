@@ -31,6 +31,11 @@ class _MyAuthPageState extends State<MyAuthPage> {
   
   String newUserEmail = "";
   String newUserPassword = "";
+
+  String loginuserPassword = "";
+  String loginUserEmail = "";
+
+  // 登録、ログインに関する情報
   String infoText = "";
 
   @override
@@ -65,11 +70,11 @@ class _MyAuthPageState extends State<MyAuthPage> {
                 onPressed: () async {
                     try {
                       final FirebaseAuth auth = FirebaseAuth.instance;
-                      final UserCredential result = auth.createUserWithEmailAndPassword(
-                        email: newUserEmail,
-                        password: newUserPassword,
+
+                      final credential =  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: newUserEmail, password: newUserPassword
                       );
-                      
+
                       final User user = result.user!;
                       setState(() {
                         infoText = "登録OK:${user.email}";
