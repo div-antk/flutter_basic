@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   // Firebase初期化
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-// void main() => runApp(MyTodoApp());
-
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,18 +26,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAuthPage extends StatefulWidget {
+  const MyAuthPage({Key? key}) : super(key: key);
   @override
-  _MyAuthPageState createState() => _MyAuthPageState();
+  MyAuthPageState createState() => MyAuthPageState();
 }
-class _MyAuthPageState extends State<MyAuthPage> {
-  
+
+class MyAuthPageState extends State<MyAuthPage> {
+  // 入力されたメールアドレス
   String newUserEmail = "";
+  // 入力されたパスワード
   String newUserPassword = "";
-
-  String loginuserPassword = "";
-  String loginUserEmail = "";
-
-  // 登録、ログインに関する情報
+  // 登録・ログインに関する情報を表示
   String infoText = "";
 
   @override
@@ -47,6 +48,7 @@ class _MyAuthPageState extends State<MyAuthPage> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                // テキスト入力のラベルを設定
                 decoration: InputDecoration(labelText: "メールアドレス"),
                 onChanged: (String value) {
                   setState(() {
@@ -56,40 +58,43 @@ class _MyAuthPageState extends State<MyAuthPage> {
               ),
               const SizedBox(height: 8),
               TextFormField(
-                  decoration: InputDecoration(labelText: "パスワード（6文字以上）"),
-                  // パスワードが見えないようにする
-                  obscureText: true,
-                  onChanged: (String value) {
-                    setState(() {
-                      newUserPassword = value;
-                    });
-                  },
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                onPressed: () async {
-                    try {
-                      final FirebaseAuth auth = FirebaseAuth.instance;
-
-                      final credential =  await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: newUserEmail, password: newUserPassword
-                      );
-
-                      final User user = result.user!;
-                      setState(() {
-                        infoText = "登録OK:${user.email}";
-                      });
-                    } catch (e) {
-                      // 登録に失敗した場合
-                      setState(() {
-                        infoText = "登録NG:${e.toString()}";
-                      });
-                    }
+                decoration: InputDecoration(labelText: "パスワード（６文字以上）"),
+                // パスワードが見えないようにする
+                obscureText: true,
+                onChanged: (String value) {
+                  setState(() {
+                    newUserPassword = value;
+                  });
                 },
-                child: const Text("ユーザー登録"),
-                ),
-                const SizedBox(height: 8),
-                Text(infoText),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    // メール/パスワードでユーザー登録
+                    final FirebaseAuth auth = FirebaseAuth.instance;
+                    final UserCredential result =
+                        await auth.createUserWithEmailAndPassword(
+                      email: newUserEmail,
+                      password: newUserPassword,
+                    );
+
+                    // 登録したユーザー情報
+                    final User user = result.user!;
+                    setState(() {
+                      infoText = "登録OK：${user.email}";
+                    });
+                  } catch (e) {
+                    // 登録に失敗した場合
+                    setState(() {
+                      infoText = "登録NG：${e.toString()}";
+                    });
+                  }
+                },
+                child: Text("ユーザー登録"),
+              ),
+              const SizedBox(height: 8),
+              Text(infoText)
             ],
           ),
         ),
