@@ -11,7 +11,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class MyAuthPageState extends State<MyAuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Container(
           padding: EdgeInsets.all(32),
@@ -71,25 +72,40 @@ class MyAuthPageState extends State<MyAuthPage> {
               ElevatedButton(
                 onPressed: () async {
                   try {
-                    // メール/パスワードでユーザー登録
-                    final FirebaseAuth auth = FirebaseAuth.instance;
-                    final UserCredential result =
-                        await auth.createUserWithEmailAndPassword(
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
                       email: newUserEmail,
                       password: newUserPassword,
                     );
-
-                    // 登録したユーザー情報
-                    final User user = result.user!;
-                    setState(() {
-                      infoText = "登録OK：${user.email}";
-                    });
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      print('The password provided is too weak.');
+                    } else if (e.code == 'email-already-in-use') {
+                      print('The account already exists for that email.');
+                    }
                   } catch (e) {
-                    // 登録に失敗した場合
-                    setState(() {
-                      infoText = "登録NG：${e.toString()}";
-                    });
+                    print(e);
                   }
+                  // try {
+                  //   // メール/パスワードでユーザー登録
+                  //   final FirebaseAuth auth = FirebaseAuth.instance;
+                  //   final UserCredential result =
+                  //       await auth.createUserWithEmailAndPassword(
+                  //     email: newUserEmail,
+                  //     password: newUserPassword,
+                  //   );
+
+                  //   // 登録したユーザー情報
+                  //   final User user = result.user!;
+                  //   setState(() {
+                  //     infoText = "登録OK：${user.email}";
+                  //   });
+                  // } catch (e) {
+                  //   // 登録に失敗した場合
+                  //   setState(() {
+                  //     infoText = "登録NG：${e.toString()}";
+                  //   });
+                  // }
                 },
                 child: Text("ユーザー登録"),
               ),
